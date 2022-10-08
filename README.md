@@ -1,24 +1,25 @@
 # lattigo and contract
-## 背景
-企业级区块链是备受关注的领域，有很多企业或个人在不停的推动企业级区块链在中国政务、司法、金融、供应链中的应用与实践。在中国，Hyperledger Fabric是企业级区块链中的佼佼者，有大量的业务落地。同时由于政府对于信息安全的重视，使得企业在相关付出了更多的努力，诸如中国国家商用密码、隐私计算等等。  
-今天在这里我想和大家分享的就是和隐私计算相关的内容。中国有一句古话叫”杀鸡焉用牛刀“，比喻做小事不必动用大的气力，说到底是成本控制，这也是企业十分关注的一个点，如何使用相对合理的成本来完成需求？隐私计算是一个大话题，但很多时候业务需要的可能只是其中的一小部分。  
-lattigo是一个用go实现的基于格的多方同态加密库，它可以使的我们能够对密文进行计算，这也就不会暴露隐私数据，就这一点也足够满足大部分业务场景。因为其足够小巧，可以灵活的在智能合约中应用，组合在一起就达成了可计算但不可篡改的优点。
-## 实践
-### 场景
-A公司需要统计本月的各项收支来制作财务报表，为了避免泄露公司经营状况，希望收支明细能够以密文存储，并能进行相关统计。例如：
-|  事项   | 收支(元)  |
+[Chinese Simplified](./doc/README_ZH.md)
+## Background
+Enterprise blockchain is an area of great concern, and many enterprises or individuals are constantly promoting the application and practice of enterprise blockchain in China's government, justice, finance, and supply chain. In China, Hyperledger Fabric is a leader in enterprise-level blockchains, with a large number of business landings. At the same time, due to the government's emphasis on information security, enterprises have made more efforts in related matters, such as China's national commercial password, privacy computing and so on.  
+What I want to share with you here today is related to private computing. China has an old saying called "killing chickens with cattle knives", figuratively doing small things without using large force, in the end it is cost control, which is also a point that enterprises are very concerned about, how to use relatively reasonable costs to complete the demand? Privacy computing is a big topic, but many times the business needs only a small part of it.  
+lattigo is a lattice-based multi-party homomorphic encryption library implemented with go, which enables us to perform calculations on ciphertext, which does not expose private data, which is enough to meet most business scenarios. Because it is small enough to be flexibly applied in smart contracts, the combination achieves computable but immutable advantages.
+## Practice
+### Scenario
+Company A needs to count the income and expenditure of this month to make financial statements, in order to avoid leaking the company's operating conditions, it is hoped that the income and expenditure details can be stored in ciphertext and relevant statistics can be carried out. For example:
+|  Matter | Income and expenditure (yuan) |
 |  ----  | ----  |
-| 团建  | -10000 |
-| 甲方结清项目款  | +1000000 |
-|结清供应商款项|-50000|
-|设备采购|-50000|
-|结余|890000|  
-### 合约
-- CreateReport: 创建一个报表
-- SubmitData： 提交数据
-- QueryData：查询并统计当前提交数据的结果
+| Team building | -10000 |
+| Party A settles the project amount | +1000000 |
+| settle supplier payments |-50,000 |
+| equipment procurement |-50000 |
+| balance | 890,000 |  
+### Contract
+- CreateReport: Create a report
+- SubmitData: Commit data
+- QueryData: Query and count the results of the currently submitted data
 
-对于上述场景，因由负责人生成一组密钥对并创建一个报表，将公钥交给需要提交数据的个人或者团体，由提交者提交通过公钥加密后的数据，负责人可在数据提交后查询并统计当前提交数据的结果，用私钥解密获得结果的明文，当然也可以直接获取加密报表并进行解密。
+For the above scenario, because the person in charge generates a set of key pairs and creates a report, the public key is handed over to the individual or group that needs to submit the data, and the submitter submits the data encrypted by the public key, the person in charge can query and count the results of the current submitted data after the data is submitted, decrypt the plaintext of the result with the private key, and of course, directly obtain the encrypted report and decrypt it.
 
-## 不足
-- 并不能很好的接入现有的fabric链码调用体系，需要进行业务封装
+## Insufficient
+- It is not well connected to the existing fabric chaincode call system, and it needs to be packaged for services
