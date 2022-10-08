@@ -1,4 +1,4 @@
-module github.com/Ning-Qing/lattigo_and_contract
+module github.com/Ning-Qing/lattigo_and_contract/contract
 
 go 1.19
 

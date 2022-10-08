@@ -13,7 +13,6 @@ import (
 var paramDef = bfv.PN13QP218
 
 func genKeyPair(t *testing.T) (*rlwe.SecretKey, *rlwe.PublicKey) {
-	paramDef := bfv.PN13QP218
 	param, err := bfv.NewParametersFromLiteral(paramDef)
 	if err != nil {
 		fmt.Println("Generate key pair failed", err.Error())
