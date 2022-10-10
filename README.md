@@ -14,6 +14,14 @@ Company A needs to count the income and expenditure of this month to make financ
 | settle supplier payments |-50,000 |
 | equipment procurement |-50000 |
 | balance | 890,000 |  
+
+|  Matter | Income and expenditure (yuan) |
+|  ----  | ----  |
+| Team building | -10000 |
+| Party A settles the project amount | +1000000 |
+| settle supplier payments |-50,000 |
+| equipment procurement |-50000 |
+| balance | 890,000 |  
 ### Contract
 - CreateReport: Create a report
 - SubmitData: Commit data
