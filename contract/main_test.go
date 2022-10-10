@@ -23,7 +23,7 @@ func genKeyPair(t *testing.T) (*rlwe.SecretKey, *rlwe.PublicKey) {
 	return kgen.GenKeyPair()
 }
 
-func decrypt(t *testing.T, data []byte, sk *rlwe.SecretKey) int64 {
+func decrypto(t *testing.T, data []byte, sk *rlwe.SecretKey) int64 {
 	param, err := bfv.NewParametersFromLiteral(paramDef)
 	if err != nil {
 		fmt.Println("decrypt: set of BFV parameters failed", err.Error())
@@ -43,7 +43,7 @@ func decrypt(t *testing.T, data []byte, sk *rlwe.SecretKey) int64 {
 	return encoder.DecodeIntNew(text)[0]
 }
 
-func encrypt(t *testing.T, data int64, pubkey *rlwe.PublicKey) []byte {
+func encrypto(t *testing.T, data int64, pubkey *rlwe.PublicKey) []byte {
 	param, err := bfv.NewParametersFromLiteral(paramDef)
 	if err != nil {
 		fmt.Println("encrypt: set of BFV parameters failed", err.Error())
@@ -105,7 +105,7 @@ func checkeQueryData(t *testing.T, stub *shimtest.MockStub, subject string, valu
 		t.FailNow()
 	}
 
-	count := decrypt(t, res.Payload, sk)
+	count := decrypto(t, res.Payload, sk)
 	if count != value {
 		fmt.Println("Query value", count, "was not", value, "as expected")
 		t.FailNow()
@@ -148,7 +148,7 @@ func TestLedgerSubmitData(t *testing.T) {
 	}
 	checkeCreateReport(t, stub, "October", pkBinary)
 
-	revenue := encrypt(t, 2000, pk)
+	revenue := encrypto(t, 2000, pk)
 	checkeSubmitData(t, stub, "October", "VoneChain", revenue)
 }
 
@@ -166,10 +166,10 @@ func TestLedgerQueryData(t *testing.T) {
 	}
 	checkeCreateReport(t, stub, "October", pkBinary)
 
-	revenue1 := encrypt(t, 2000, pk)
+	revenue1 := encrypto(t, 2000, pk)
 	checkeSubmitData(t, stub, "October", "VoneChain", revenue1)
 
-	revenue2 := encrypt(t, -1000, pk)
+	revenue2 := encrypto(t, -1000, pk)
 	checkeSubmitData(t, stub, "October", "GitHub", revenue2)
 
 	checkeQueryData(t, stub, "October", 1000, sk)
